@@ -13,11 +13,11 @@ var configFileName string
 
 func displayIP(responseWriter http.ResponseWriter, request *http.Request) {
 
-	//var jsonData Jsdata
-	//ModifyConfig(configFileName, &jsonData, true)
+	var jsonData Jsdata
+	ModifyConfig(configFileName, &jsonData, true)
 	//log.Println(jsonData)
 
-	fmt.Fprintf(responseWriter, "ip:%s", "10086")
+	fmt.Fprintf(responseWriter, "ip:%s", jsonData.Value)
 
 }
 func updateIP(responseWriter http.ResponseWriter, request *http.Request) {
