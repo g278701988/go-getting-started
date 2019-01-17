@@ -9,13 +9,12 @@ import (
 	"path/filepath"
 )
 
-
 func determineListenAddress() (string, error) {
-  port := os.Getenv("PORT")
-  if port == "" {
-    return "", fmt.Errorf("$PORT not set")
-  }
-  return ":" + port, nil
+	port := os.Getenv("PORT")
+	if port == "" {
+		return "", fmt.Errorf("$PORT not set")
+	}
+	return ":" + port, nil
 }
 
 var configFileName string
@@ -35,6 +34,7 @@ func updateIP(responseWriter http.ResponseWriter, request *http.Request) {
 	if err != nil {
 
 		fmt.Fprintf(responseWriter, "userip: %q is not IP:port", request.RemoteAddr)
+		return
 	}
 	var jsonData = Jsdata{Key: "ip", Value: ip}
 	ModifyConfig(configFileName, &jsonData, false)
@@ -45,10 +45,12 @@ func updateIP(responseWriter http.ResponseWriter, request *http.Request) {
 func main() {
 
 	addr, err := determineListenAddress()
-  if err == nil {
-  
-  Path, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	if nil == err {	
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
+	Path, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	if nil == err {
 		log.Println(Path)
 		log.Println("web begin")
 		ConfigName := "config.txt"
@@ -69,13 +71,6 @@ func main() {
 		}
 
 	}
-	else{
-		log.Fatal(err)
-	}
 
-   
-  }
-  
-	
 	log.Println("web end")
 }
