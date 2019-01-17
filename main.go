@@ -30,13 +30,7 @@ func displayIP(responseWriter http.ResponseWriter, request *http.Request) {
 }
 func updateIP(responseWriter http.ResponseWriter, request *http.Request) {
 
-	ip, _, err := net.SplitHostPort(request.RemoteAddr)
-	if err != nil {
-
-		fmt.Fprintf(responseWriter, "userip: %q is not IP:port", request.RemoteAddr)
-		return
-	}
-	var jsonData = Jsdata{Key: "ip", Value: ip}
+	var jsonData = Jsdata{Key: "ip", Value: request.Host}
 	ModifyConfig(configFileName, &jsonData, false)
 	//log.Println(jsonData)
 	fmt.Fprintf(responseWriter, "%s!", "ok")
