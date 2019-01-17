@@ -29,10 +29,14 @@ func displayIP(responseWriter http.ResponseWriter, request *http.Request) {
 }
 func updateIP(responseWriter http.ResponseWriter, request *http.Request) {
 
-	var jsonData = Jsdata{Key: "ip", Value: request.Host}
-	ModifyConfig(configFileName, &jsonData, false)
-	//log.Println(jsonData)
-	fmt.Fprintf(responseWriter, "%s!", "ok")
+	ip, ok := request.URL.Query()["ip"]
+	if ok {
+		var jsonData = Jsdata{Key: "ip", Value: ip[0]}
+		ModifyConfig(configFileName, &jsonData, false)
+		//log.Println(jsonData)
+		fmt.Fprintf(responseWriter, "%s!", "ok")
+
+	}
 
 }
 func main() {
