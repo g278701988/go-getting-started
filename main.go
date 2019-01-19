@@ -17,6 +17,20 @@ func determineListenAddress() (string, error) {
 }
 
 var configFileName string
+func getPublicIP2() string {
+
+	resp, err := http.Get("http://206.189.91.42/")
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalln(err)
+		return string("")
+	}
+	return string(body)
+}
 
 func displayIP(responseWriter http.ResponseWriter, request *http.Request) {
 
@@ -24,7 +38,8 @@ func displayIP(responseWriter http.ResponseWriter, request *http.Request) {
 	ModifyConfig(configFileName, &jsonData, true)
 	//log.Println(jsonData)
 
-	fmt.Fprintf(responseWriter, "ip:%s", jsonData.Value)
+	ip2 := getPublicIP2()
+	fmt.Fprintf(responseWriter, "ip:%s\n%s", jsonData.Value, ip2)
 
 }
 func updateIP(responseWriter http.ResponseWriter, request *http.Request) {
