@@ -22,12 +22,13 @@ func getPublicIP2() string {
 
 	resp, err := http.Get("http://206.189.91.42/")
 	if err != nil {
-		log.Fatalln(err)
+		//log.Fatalln(err)
+		return string("")
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatalln(err)
+		//log.Fatalln(err)
 		return string("")
 	}
 	return string(body)
