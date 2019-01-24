@@ -40,8 +40,8 @@ func displayIP(responseWriter http.ResponseWriter, request *http.Request) {
 	ModifyConfig(configFileName, &jsonData, true)
 	//log.Println(jsonData)
 
-	//ip2 := getPublicIP2()
-	fmt.Fprintf(responseWriter, "ip:%s\n", jsonData.Value)
+	ip2 := getPublicIP2()
+	fmt.Fprintf(responseWriter, "ip:%s\nip:%s", jsonData.Value,ip2)
 
 }
 func updateIP(responseWriter http.ResponseWriter, request *http.Request) {
