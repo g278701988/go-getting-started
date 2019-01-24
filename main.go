@@ -41,7 +41,7 @@ func displayIP(responseWriter http.ResponseWriter, request *http.Request) {
 	//log.Println(jsonData)
 
 	ip2 := getPublicIP2()
-	fmt.Fprintf(responseWriter, "ip:%s\nip:%s", jsonData.Value,ip2)
+	fmt.Fprintf(responseWriter, "ip:%s\n%s", jsonData.Value,ip2)
 
 }
 func updateIP(responseWriter http.ResponseWriter, request *http.Request) {
