@@ -29,7 +29,7 @@ func getGithubConfig() string {
 		return string("")
 	}
 
-	return fmt.Sprintf("%v:%v\n%v:%v ", jsData[0].Key, jsData[0].Value, jsData[1].Key, jsData[1].Value)
+	return fmt.Sprintf("%v:%v\n(update every half hour)", jsData[0].Key, jsData[0].Value)
 }
 
 func displayIP(responseWriter http.ResponseWriter, request *http.Request) {
