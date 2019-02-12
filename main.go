@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"encoding/json"
 )
 
 func determineListenAddress() (string, error) {
