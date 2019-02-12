@@ -16,8 +16,6 @@ func determineListenAddress() (string, error) {
 	return ":" + port, nil
 }
 
-var configFileName string
-
 func getGithubConfig() string {
 
 	resp, err := http.Get("https://raw.githubusercontent.com/g278701988/go-getting-started/master/config.txt")
