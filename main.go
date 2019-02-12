@@ -35,7 +35,7 @@ func getGithubConfig() string {
 func displayIP(responseWriter http.ResponseWriter, request *http.Request) {
 
 	ip2 := getGithubConfig()
-	fmt.Fprintf(responseWriter, "%s\t(data will update when ip changed)", ip2)
+	fmt.Fprintf(responseWriter, "%s", ip2)
 
 }
 
