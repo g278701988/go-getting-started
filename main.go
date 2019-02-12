@@ -39,8 +39,8 @@ func displayIP(responseWriter http.ResponseWriter, request *http.Request) {
 	ModifyConfig(configFileName, &jsonData, true)
 	//log.Println(jsonData)
 
-	//ip2 := getPublicIP2()
-	fmt.Fprintf(responseWriter, "ip:%s(update every half hour)\n", jsonData.Value)
+	ip2 := getGithubConfig()
+	fmt.Fprintf(responseWriter, "ip:%s\nip:%s(update every half hour)\n", jsonData.Value,ip2)
 
 }
 func updateIP(responseWriter http.ResponseWriter, request *http.Request) {
