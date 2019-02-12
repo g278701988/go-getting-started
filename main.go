@@ -18,20 +18,19 @@ func determineListenAddress() (string, error) {
 }
 
 var configFileName string
-func getPublicIP2() string {
+func getGithubConfig() string {
 
-	resp, err := http.Get("http://206.189.91.42/")
+	resp, err := http.Get("https://raw.githubusercontent.com/g278701988/go-getting-started/master/config.txt")
 	if err != nil {
-		//log.Fatalln(err)
+		log.Printf("Get err%v", err)
 		return string("")
 	}
-
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		//log.Fatalln(err)
+	var jsData Jsdata
+	if err := json.NewDecoder(resp.Body).Decode(&jsData); nil != err {
+		log.Printf("Decode err%v", err)
 		return string("")
 	}
-	return string(body)
+	return jsData.Value
 }
 
 func displayIP(responseWriter http.ResponseWriter, request *http.Request) {
