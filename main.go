@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 	"os"
@@ -29,13 +30,15 @@ func getGithubConfig() string {
 		return string("")
 	}
 
-	return fmt.Sprintf("%v:%v\n(update every half hour)", jsData[0].Key, jsData[0].Value)
+	return jsData[0].Value
 }
 
 func displayIP(responseWriter http.ResponseWriter, request *http.Request) {
 
-	ip2 := getGithubConfig()
-	fmt.Fprintf(responseWriter, "%s", ip2)
+	ip := getGithubConfig()
+	// fmt.Fprintf(responseWriter, "%s", ip)
+	t := template.Must(template.ParseFiles("display.html"))
+	t.Execute(responseWriter, ip)
 
 }
 
